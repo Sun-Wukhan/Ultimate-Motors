@@ -337,19 +337,19 @@ const Hero = () => {
       {/* Fallback background */}
       <FallbackBackground />
       
+      {/* Video will be added after deployment via hosting provider */}
+      {/* 
       <VideoBackground
         autoPlay
         muted
         loop
         playsInline
         controls={false}
-        onLoadStart={() => console.log('Video loading...')}
-        onError={(e) => console.error('Video failed to load:', e)}
-        onCanPlay={() => console.log('Video ready to play')}
       >
         <source src="/images/hero/b371e117a3084b34968a0b6ad3fadf03.MP4" type="video/mp4" />
         Your browser does not support the video tag.
       </VideoBackground>
+      */}
       
       <VideoOverlay />
       

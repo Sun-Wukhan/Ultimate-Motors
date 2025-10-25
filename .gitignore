@@ -148,8 +148,10 @@ Thumbs.db
 *.tmp
 *.temp
 
-# Large video files (use original video in images/hero/ folder instead)
-/public/hero-video.mp4
+# Large video files - exclude all videos from git
 *.mp4
-!public/images/hero/*.MP4
-!public/images/hero/*.mp4
+*.MP4
+*.mov
+*.MOV
+*.avi
+*.AVI
