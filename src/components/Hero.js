@@ -37,12 +37,29 @@ const VideoBackground = styled.video`
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   z-index: 1;
   background: #000;
   
   /* Ensure video loads and displays */
   &::-webkit-media-controls {
     display: none !important;
+  }
+  
+  /* Better handling for portrait videos */
+  @media (max-width: 768px) {
+    object-fit: cover;
+    object-position: center;
+  }
+  
+  /* Smooth loading */
+  opacity: 0;
+  animation: fadeIn 1s ease-in-out 0.5s forwards;
+  
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
   }
 `;
 
@@ -344,7 +361,7 @@ const Hero = () => {
         playsInline
         controls={false}
       >
-        <source src="/images/hero/hero-video-compressed.mp4" type="video/mp4" />
+        <source src="/images/hero/hero-video-portrait.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </VideoBackground>
       
