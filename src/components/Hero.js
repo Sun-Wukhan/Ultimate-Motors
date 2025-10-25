@@ -1,11 +1,12 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { FiArrowRight, FiStar, FiAward } from 'react-icons/fi';
+import { useTheme } from '../contexts/ThemeContext';
 
 const fadeInUp = keyframes`
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(1.875rem);
   }
   to {
     opacity: 1;
@@ -15,10 +16,10 @@ const fadeInUp = keyframes`
 
 const float = keyframes`
   0%, 100% {
-    transform: translateY(0px);
+    transform: translateY(0);
   }
   50% {
-    transform: translateY(-10px);
+    transform: translateY(-0.625rem);
   }
 `;
 
@@ -28,6 +29,7 @@ const HeroSection = styled.section`
   align-items: center;
   position: relative;
   overflow: hidden;
+  background: ${props => props.theme.background.primary};
 `;
 
 const VideoBackground = styled.video`
@@ -39,20 +41,17 @@ const VideoBackground = styled.video`
   object-fit: cover;
   object-position: center;
   z-index: 1;
-  background: #000;
+  background: ${props => props.theme.background.secondary};
   
-  /* Ensure video loads and displays */
   &::-webkit-media-controls {
     display: none !important;
   }
   
-  /* Better handling for portrait videos */
-  @media (max-width: 768px) {
+  @media (max-width: 48rem) {
     object-fit: cover;
     object-position: center;
   }
   
-  /* Smooth loading */
   opacity: 0;
   animation: fadeIn 1s ease-in-out 0.5s forwards;
   
@@ -69,12 +68,7 @@ const VideoOverlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    135deg,
-    rgba(0, 0, 0, 0.7) 0%,
-    rgba(0, 0, 0, 0.5) 50%,
-    rgba(0, 0, 0, 0.7) 100%
-  );
+  background: ${props => props.theme.background.videoOverlay};
   z-index: 2;
   pointer-events: none;
 `;
@@ -85,274 +79,305 @@ const FallbackBackground = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    135deg,
-    rgba(10, 10, 10, 0.9) 0%,
-    rgba(20, 20, 20, 0.8) 50%,
-    rgba(10, 10, 10, 0.9) 100%
-  ),
-  url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="%23333" stroke-width="1" opacity="0.3"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
-  background-size: cover;
-  background-position: center;
-  z-index: -3;
+  background: ${props => props.theme.gradients.overlay};
+  z-index: -1;
 `;
 
 const HeroContent = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: center;
   position: relative;
   z-index: 10;
+  width: 100%;
+  max-width: 75rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
   
-  @media (max-width: 968px) {
+  @media (max-width: 64rem) {
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: 3rem;
     text-align: center;
+  }
+  
+  @media (max-width: 48rem) {
+    padding: 0 1rem;
+    gap: 2rem;
   }
 `;
 
 const TextContent = styled.div`
-  animation: ${fadeInUp} 1s ease-out;
+  animation: ${fadeInUp} 0.8s ease-out;
 `;
 
 const Badge = styled.div`
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  background: rgba(220, 38, 38, 0.1);
-  border: 1px solid rgba(220, 38, 38, 0.3);
-  padding: 8px 16px;
-  border-radius: 25px;
-  color: #dc2626;
-  font-size: 14px;
-  font-weight: 500;
-  margin-bottom: 20px;
-  backdrop-filter: blur(10px);
+  gap: 0.5rem;
+  background: ${props => props.theme.gradients.primary};
+  color: ${props => props.theme.text.white};
+  padding: 0.75rem 1.5rem;
+  border-radius: 2rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 1.5rem;
+  box-shadow: ${props => props.theme.shadows.glow};
+  
+  svg {
+    font-size: 1rem;
+  }
 `;
 
 const MainHeading = styled.h1`
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  font-weight: 700;
-  color: #fff;
+  font-size: 4rem;
+  font-weight: 800;
   line-height: 1.1;
-  margin-bottom: 20px;
+  color: ${props => props.theme.text.white};
+  margin-bottom: 1.5rem;
+  text-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.5);
   
-  .highlight {
-    background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  @media (max-width: 64rem) {
+    font-size: 3.5rem;
+  }
+  
+  @media (max-width: 48rem) {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  @media (max-width: 30rem) {
+    font-size: 2rem;
   }
 `;
 
 const SubHeading = styled.p`
   font-size: 1.25rem;
-  color: #ccc;
+  color: ${props => props.theme.text.white};
+  margin-bottom: 2rem;
   line-height: 1.6;
-  margin-bottom: 30px;
-  max-width: 500px;
+  opacity: 0.9;
+  text-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.5);
+  
+  @media (max-width: 48rem) {
+    font-size: 1.125rem;
+    margin-bottom: 1.5rem;
+  }
 `;
 
-const CTAButtons = styled.div`
+const ButtonGroup = styled.div`
   display: flex;
-  gap: 20px;
-  margin-bottom: 40px;
+  gap: 1rem;
   
-  @media (max-width: 480px) {
+  @media (max-width: 48rem) {
     flex-direction: column;
     align-items: center;
   }
 `;
 
 const PrimaryButton = styled.button`
-  background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
-  color: #fff;
+  background: ${props => props.theme.gradients.primary};
+  color: ${props => props.theme.text.white};
   border: none;
-  padding: 16px 32px;
-  border-radius: 30px;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  font-size: 1.125rem;
   font-weight: 600;
-  font-size: 16px;
   cursor: pointer;
-  transition: all 0.3s ease;
   display: flex;
   align-items: center;
-  gap: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  box-shadow: ${props => props.theme.shadows.medium};
   
   &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 35px rgba(220, 38, 38, 0.4);
+    transform: translateY(-0.125rem);
+    box-shadow: ${props => props.theme.shadows.glow};
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+  
+  svg {
+    transition: transform 0.3s ease;
+  }
+  
+  &:hover svg {
+    transform: translateX(0.25rem);
   }
 `;
 
 const SecondaryButton = styled.button`
   background: transparent;
-  color: #fff;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  padding: 14px 30px;
-  border-radius: 30px;
-  font-weight: 500;
-  font-size: 16px;
+  color: ${props => props.theme.text.white};
+  border: 0.125rem solid ${props => props.theme.text.white};
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  font-size: 1.125rem;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
   
   &:hover {
-    border-color: #dc2626;
-    color: #dc2626;
-    transform: translateY(-2px);
+    background: ${props => props.theme.text.white};
+    color: ${props => props.theme.text.primary};
+    transform: translateY(-0.125rem);
   }
-`;
-
-const Stats = styled.div`
-  display: flex;
-  gap: 40px;
   
-  @media (max-width: 480px) {
-    justify-content: center;
+  &:active {
+    transform: translateY(0);
   }
 `;
 
-const StatItem = styled.div`
-  text-align: left;
-  
-  @media (max-width: 968px) {
-    text-align: center;
-  }
-`;
-
-const StatNumber = styled.div`
-  font-size: 2rem;
-  font-weight: 700;
-  color: #dc2626;
-  font-family: 'Playfair Display', serif;
-`;
-
-const StatLabel = styled.div`
-  font-size: 14px;
-  color: #ccc;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-`;
-
-const VisualContent = styled.div`
+const ImageSection = styled.div`
   position: relative;
-  animation: ${fadeInUp} 1s ease-out 0.3s both;
+  animation: ${fadeInUp} 0.8s ease-out 0.2s both;
 `;
 
 const CarShowcase = styled.div`
   position: relative;
-  background: linear-gradient(135deg, rgba(220, 38, 38, 0.1) 0%, rgba(239, 68, 68, 0.05) 100%);
-  border-radius: 20px;
-  padding: 40px;
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(220, 38, 38, 0.2);
-  animation: ${float} 6s ease-in-out infinite;
-`;
-
-const CarImage = styled.div`
-  width: 100%;
-  height: 300px;
-  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-  border-radius: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #dc2626;
-  font-size: 18px;
-  font-weight: 500;
-  position: relative;
-  overflow: hidden;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(220, 38, 38, 0.1), transparent);
-    animation: shimmer 3s infinite;
-  }
-  
-  @keyframes shimmer {
-    0% { left: -100%; }
-    100% { left: 100%; }
-  }
-`;
-
-const CarDetails = styled.div`
-  margin-top: 20px;
-  text-align: center;
+  background: ${props => props.theme.background.overlay};
+  border-radius: 1rem;
+  padding: 2rem;
+  backdrop-filter: blur(0.625rem);
+  border: 0.0625rem solid rgba(255, 255, 255, 0.1);
+  box-shadow: ${props => props.theme.shadows.large};
 `;
 
 const CarName = styled.h3`
-  color: #fff;
   font-size: 1.5rem;
-  margin-bottom: 5px;
+  font-weight: 700;
+  color: ${props => props.theme.text.white};
+  margin-bottom: 0.5rem;
 `;
 
 const CarPrice = styled.p`
-  color: #dc2626;
-  font-size: 1.25rem;
+  font-size: 1.125rem;
+  color: ${props => props.theme.colors.primary};
   font-weight: 600;
-`;
-
-const FloatingElements = styled.div`
-  position: absolute;
-  top: 20%;
-  right: 10%;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  
-  @media (max-width: 968px) {
-    display: none;
-  }
-`;
-
-const FloatingCard = styled.div`
-  background: rgba(220, 38, 38, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(220, 38, 38, 0.2);
-  border-radius: 15px;
-  padding: 15px;
-  color: #fff;
-  font-size: 14px;
-  animation: ${float} 4s ease-in-out infinite;
-  animation-delay: ${props => props.delay || '0s'};
+  margin-bottom: 1.5rem;
 `;
 
 const HeroImage = styled.img`
   width: 100%;
-  height: 100%;
+  height: 20rem;
   object-fit: cover;
-  border-radius: 15px;
-  transition: transform 0.3s ease;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
   
-  ${CarShowcase}:hover & {
-    transform: scale(1.02);
+  @media (max-width: 48rem) {
+    height: 15rem;
   }
 `;
 
-const FloatingIcon = styled.div`
-  margin-bottom: 5px;
+const StatsGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 1.5rem;
 `;
 
+const StatItem = styled.div`
+  text-align: center;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+  backdrop-filter: blur(0.625rem);
+`;
+
+const StatNumber = styled.div`
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: ${props => props.theme.colors.primary};
+  margin-bottom: 0.25rem;
+`;
+
+const StatLabel = styled.div`
+  font-size: 0.75rem;
+  color: ${props => props.theme.text.white};
+  opacity: 0.8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+`;
+
+const FloatingIcons = styled.div`
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+`;
+
+const FloatingIcon = styled.div`
+  width: 3rem;
+  height: 3rem;
+  background: ${props => props.theme.gradients.primary};
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: ${props => props.theme.text.white};
+  font-size: 1.125rem;
+  animation: ${float} 3s ease-in-out infinite;
+  box-shadow: ${props => props.theme.shadows.medium};
+  
+  &:nth-child(2) {
+    animation-delay: 0.5s;
+  }
+  
+  &:nth-child(3) {
+    animation-delay: 1s;
+  }
+`;
+
+// High-quality car images from web
+const carImages = [
+  {
+    src: "https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    name: "BMW M4 Competition",
+    price: "Premium Restoration",
+    alt: "BMW M4 Competition"
+  },
+  {
+    src: "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80",
+    name: "Toyota Supra",
+    price: "Complete Overhaul",
+    alt: "Toyota Supra"
+  },
+  {
+    src: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    name: "Acura NSX",
+    price: "Insurance Claim",
+    alt: "Acura NSX"
+  }
+];
+
 /**
- * Hero section component showcasing luxury car services
+ * Hero section component showcasing automotive services
+ * Features video background, theme support, and responsive design
  * @returns {JSX.Element} The hero section
  */
 const Hero = () => {
+  const { theme } = useTheme();
+  const [currentCar, setCurrentCar] = React.useState(0);
+
+  // Auto-rotate car showcase
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentCar(prev => (prev + 1) % carImages.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const currentCarData = carImages[currentCar];
+
   return (
-    <HeroSection id="home">
-      {/* Fallback background */}
-      <FallbackBackground />
+    <HeroSection id="home" theme={theme}>
+      <FallbackBackground theme={theme} />
       
       <VideoBackground
         autoPlay
@@ -361,86 +386,79 @@ const Hero = () => {
         playsInline
         controls={false}
       >
-        <source src="/images/hero/hero-video-portrait.mp4" type="video/mp4" />
+        <source src="/images/hero/hero-video-hq.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </VideoBackground>
       
-      <VideoOverlay />
-      
+      <VideoOverlay theme={theme} />
       
       <HeroContent>
         <TextContent>
-          <Badge>
+          <Badge theme={theme}>
             <FiAward />
-            Professional Auto Restoration Services
+            Premium Auto Body Services
           </Badge>
           
-          <MainHeading>
-            Expert <span className="highlight">Restoration</span> for 
-            <span className="highlight"> All</span> Vehicles
+          <MainHeading theme={theme}>
+            Ultimate Motors
+            <br />
+            <span style={{ color: theme.colors.primary }}>Restoration</span>
           </MainHeading>
           
-          <SubHeading>
-            From luxury cars to everyday vehicles, we provide comprehensive restoration 
-            services and work with all major insurance companies. Where craftsmanship meets cutting-edge technology.
+          <SubHeading theme={theme}>
+            Professional auto body repair and restoration services for all vehicle types. 
+            From luxury cars to everyday vehicles, we handle insurance claims and 
+            complete restorations with precision and care.
           </SubHeading>
           
-          <CTAButtons>
-            <PrimaryButton>
-              Schedule Consultation
+          <ButtonGroup>
+            <PrimaryButton theme={theme}>
+              Get Free Quote
               <FiArrowRight />
             </PrimaryButton>
-            <SecondaryButton>
-              View Our Work
+            <SecondaryButton theme={theme}>
+              View Gallery
             </SecondaryButton>
-          </CTAButtons>
-          
-          <Stats>
-            <StatItem>
-              <StatNumber>15+</StatNumber>
-              <StatLabel>Years Experience</StatLabel>
-            </StatItem>
-            <StatItem>
-              <StatNumber>500+</StatNumber>
-              <StatLabel>Vehicles Restored</StatLabel>
-            </StatItem>
-            <StatItem>
-              <StatNumber>98%</StatNumber>
-              <StatLabel>Client Satisfaction</StatLabel>
-            </StatItem>
-          </Stats>
+          </ButtonGroup>
         </TextContent>
         
-        <VisualContent>
-          <CarShowcase>
-            <CarImage>
-              <HeroImage 
-                src="/images/IMG_4814.jpg" 
-                alt="Professional Auto Restoration"
-              />
-            </CarImage>
-            <CarDetails>
-              <CarName>Professional Restoration</CarName>
-              <CarPrice>Insurance Claims Welcome - Free Estimates</CarPrice>
-            </CarDetails>
+        <ImageSection>
+          <CarShowcase theme={theme}>
+            <FloatingIcons>
+              <FloatingIcon theme={theme}>
+                <FiStar />
+              </FloatingIcon>
+              <FloatingIcon theme={theme}>
+                <FiAward />
+              </FloatingIcon>
+            </FloatingIcons>
+            
+            <CarName theme={theme}>{currentCarData.name}</CarName>
+            <CarPrice theme={theme}>{currentCarData.price}</CarPrice>
+            
+            <HeroImage 
+              src={currentCarData.src} 
+              alt={currentCarData.alt}
+              loading="lazy"
+            />
+            
+            <StatsGrid>
+              <StatItem>
+                <StatNumber theme={theme}>15+</StatNumber>
+                <StatLabel theme={theme}>Years Experience</StatLabel>
+              </StatItem>
+              <StatItem>
+                <StatNumber theme={theme}>2000+</StatNumber>
+                <StatLabel theme={theme}>Cars Restored</StatLabel>
+              </StatItem>
+              <StatItem>
+                <StatNumber theme={theme}>100%</StatNumber>
+                <StatLabel theme={theme}>Satisfaction</StatLabel>
+              </StatItem>
+            </StatsGrid>
           </CarShowcase>
-        </VisualContent>
+        </ImageSection>
       </HeroContent>
-      
-      <FloatingElements>
-        <FloatingCard delay="0s">
-          <FloatingIcon>
-            <FiStar />
-          </FloatingIcon>
-          5-Star Rating
-        </FloatingCard>
-        <FloatingCard delay="1s">
-          <FloatingIcon>
-            <FiAward />
-          </FloatingIcon>
-          Certified Technicians
-        </FloatingCard>
-      </FloatingElements>
     </HeroSection>
   );
 };
