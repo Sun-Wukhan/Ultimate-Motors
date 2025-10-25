@@ -1,0 +1,2 @@
+This folder is for gallery images.
+Add your project photos here and reference them as /images/gallery/filename.jpg

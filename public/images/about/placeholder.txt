@@ -1,0 +1,2 @@
+This folder is for about section images.
+Add facility and team photos here and reference them as /images/about/filename.jpg

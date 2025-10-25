@@ -1,0 +1,2 @@
+This folder is for hero section images.
+Add your main showcase images here and reference them as /images/hero/filename.jpg
