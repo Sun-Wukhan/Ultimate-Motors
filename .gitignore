@@ -155,3 +155,5 @@ Thumbs.db
 *.MOV
 *.avi
 *.AVI
+# Local Netlify folder
+.netlify

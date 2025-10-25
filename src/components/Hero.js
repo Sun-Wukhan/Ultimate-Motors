@@ -337,8 +337,6 @@ const Hero = () => {
       {/* Fallback background */}
       <FallbackBackground />
       
-      {/* Video will be added after deployment via hosting provider */}
-      {/* 
       <VideoBackground
         autoPlay
         muted
@@ -346,10 +344,9 @@ const Hero = () => {
         playsInline
         controls={false}
       >
-        <source src="/images/hero/b371e117a3084b34968a0b6ad3fadf03.MP4" type="video/mp4" />
+        <source src="/images/hero/hero-video-compressed.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </VideoBackground>
-      */}
       
       <VideoOverlay />
       
