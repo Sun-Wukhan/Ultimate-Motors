@@ -4,8 +4,8 @@
 # Usage: ./manage-dns.sh [list|set|delete]
 
 DOMAIN="ultimate-motors.ca"
-GODADDY_API_KEY="gHAEJSADjmwW_ECSzrrSP9ogHejh8Xre24t"  # Add your API key here
-GODADDY_API_SECRET="FAtT1B31Wjcq8nQ4qUA6fk"  # Add your API secret here
+GODADDY_API_KEY=""  # Add your API key here
+GODADDY_API_SECRET=""  # Add your API secret here
 
 # Colors for output
 RED='\033[0;31m'
