@@ -7,12 +7,14 @@ const GallerySection = styled.section`
   padding: 7.5rem 0;
   background: ${props => props.theme.background.primary};
   position: relative;
+  margin-top: 2rem; 
 `;
 
 const Container = styled.div`
   max-width: 75rem;
   margin: 0 auto;
   padding: 0 1.25rem;
+  margin-top: 2rem; 
 `;
 
 const SectionHeader = styled.div`
@@ -66,9 +68,9 @@ const FilterTabs = styled.div`
 `;
 
 const FilterTab = styled.button`
-  background: ${props => props.active ? props.theme.gradients.primary : 'transparent'};
-  color: ${props => props.active ? props.theme.text.white : props.theme.text.secondary};
-  border: 0.0625rem solid ${props => props.active ? 'transparent' : props.theme.colors.primary};
+  background: ${props => props.$active ? props.theme?.gradients?.primary || 'linear-gradient(135deg, #dc2626 0%, #b91c1c 100%)' : 'transparent'};
+  color: ${props => props.$active ? props.theme?.text?.white || '#ffffff' : props.theme?.text?.secondary || '#666666'};
+  border: 0.0625rem solid ${props => props.$active ? 'transparent' : props.theme?.colors?.primary || '#dc2626'};
   padding: 0.75rem 1.5rem;
   border-radius: 2rem;
   font-size: 0.875rem;
@@ -77,8 +79,8 @@ const FilterTab = styled.button`
   transition: all 0.3s ease;
   
   &:hover {
-    background: ${props => props.theme.gradients.primary};
-    color: ${props => props.theme.text.white};
+    background: ${props => props.theme?.gradients?.primary || 'linear-gradient(135deg, #dc2626 0%, #b91c1c 100%)'};
+    color: ${props => props.theme?.text?.white || '#ffffff'};
     transform: translateY(-0.125rem);
   }
 `;
@@ -274,92 +276,92 @@ const NavigationButton = styled.button`
   }
 `;
 
-// High-quality car restoration images
+// High-quality automotive restoration work
 const galleryItems = [
-  // BMW Work
+  // Luxury Sports Car Work
   {
     id: 1,
     src: "https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    title: "BMW M4 Competition",
-    category: "BMW",
+    title: "Luxury Sports Car Restoration",
+    category: "Luxury",
     description: "Complete body restoration and paint correction"
   },
   {
     id: 2,
     src: "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    title: "BMW M3 Restoration",
-    category: "BMW",
+    title: "Performance Vehicle Repair",
+    category: "Performance",
     description: "Insurance claim repair and custom modifications"
   },
   {
     id: 3,
     src: "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    title: "BMW X5 Body Work",
-    category: "BMW",
+    title: "SUV Body Work",
+    category: "SUV",
     description: "Collision repair and panel replacement"
   },
   
-  // Toyota Supra Work
+  // Sports Car Work
   {
     id: 4,
     src: "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    title: "Toyota Supra MK5",
-    category: "Toyota",
+    title: "Sports Car Restoration",
+    category: "Sports",
     description: "Performance restoration and custom paint"
   },
   {
     id: 5,
     src: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    title: "Toyota Supra Classic",
-    category: "Toyota",
+    title: "Classic Car Restoration",
+    category: "Classic",
     description: "Complete frame-off restoration"
   },
   
-  // Acura/Honda Work
+  // Exotic/Supercar Work
   {
     id: 6,
     src: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    title: "Acura NSX",
-    category: "Acura",
+    title: "Exotic Car Bodywork",
+    category: "Exotic",
     description: "Precision bodywork and paint matching"
   },
   {
     id: 7,
     src: "https://images.unsplash.com/photo-1609521263047-f8f205293f24?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    title: "Honda Civic Type R",
-    category: "Honda",
+    title: "Track Car Preparation",
+    category: "Performance",
     description: "Track-ready restoration and modifications"
   },
   
-  // Mercedes Work
+  // Luxury Vehicle Work
   {
     id: 8,
     src: "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    title: "Mercedes-AMG GT",
-    category: "Mercedes",
-    description: "Luxury vehicle restoration and detailing"
+    title: "Luxury Vehicle Restoration",
+    category: "Luxury",
+    description: "Premium vehicle restoration and detailing"
   },
   {
     id: 9,
     src: "https://images.unsplash.com/photo-1563720223185-11003d516935?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    title: "Mercedes C-Class",
-    category: "Mercedes",
+    title: "Sedan Body Repair",
+    category: "Sedan",
     description: "Insurance claim and panel repair"
   },
   
-  // Porsche Work
+  // High-End Sports Car Work
   {
     id: 10,
     src: "https://images.unsplash.com/photo-1544829099-b9a0c5303bea?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    title: "Porsche 911",
-    category: "Porsche",
+    title: "High-End Sports Car",
+    category: "Sports",
     description: "Classic restoration and modernization"
   },
   {
     id: 11,
     src: "https://images.unsplash.com/photo-1580273916550-e323be2ae537?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    title: "Porsche Cayman",
-    category: "Porsche",
+    title: "Mid-Engine Sports Car",
+    category: "Sports",
     description: "Performance upgrades and bodywork"
   },
   
@@ -367,13 +369,13 @@ const galleryItems = [
   {
     id: 12,
     src: "/images/gallery/IMG_4667.jpg",
-    title: "Local Project",
+    title: "Custom Project",
     category: "Custom",
     description: "Custom restoration project"
   }
 ];
 
-const categories = ['All', 'BMW', 'Toyota', 'Acura', 'Honda', 'Mercedes', 'Porsche', 'Custom'];
+const categories = ['All', 'Luxury', 'Sports', 'Performance', 'Classic', 'Exotic', 'SUV', 'Sedan', 'Custom'];
 
 /**
  * Gallery component showcasing automotive restoration work
@@ -452,7 +454,7 @@ const Gallery = () => {
           {categories.map(category => (
             <FilterTab
               key={category}
-              active={activeFilter === category}
+              $active={activeFilter === category}
               onClick={() => setActiveFilter(category)}
               theme={theme}
             >

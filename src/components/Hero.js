@@ -29,7 +29,8 @@ const HeroSection = styled.section`
   align-items: center;
   position: relative;
   overflow: hidden;
-  background: ${props => props.theme.background.primary};
+  background: ${props => props.theme?.background?.primary || '#ffffff'};
+  padding-top: 6rem; /* Add space for fixed header */
 `;
 
 const VideoBackground = styled.video`
@@ -41,7 +42,7 @@ const VideoBackground = styled.video`
   object-fit: cover;
   object-position: center;
   z-index: 1;
-  background: ${props => props.theme.background.secondary};
+  background: ${props => props.theme?.background?.secondary || '#000'};
   
   &::-webkit-media-controls {
     display: none !important;
@@ -68,7 +69,7 @@ const VideoOverlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: ${props => props.theme.background.videoOverlay};
+  background: ${props => props.theme?.background?.videoOverlay || 'rgba(0, 0, 0, 0.4)'};
   z-index: 2;
   pointer-events: none;
 `;
@@ -79,7 +80,7 @@ const FallbackBackground = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: ${props => props.theme.gradients.overlay};
+  background: ${props => props.theme?.gradients?.overlay || 'linear-gradient(135deg, rgba(220, 38, 38, 0.9) 0%, rgba(0, 0, 0, 0.7) 100%)'};
   z-index: -1;
 `;
 
@@ -115,8 +116,8 @@ const Badge = styled.div`
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: ${props => props.theme.gradients.primary};
-  color: ${props => props.theme.text.white};
+  background: ${props => props.theme?.gradients?.primary || 'linear-gradient(135deg, #dc2626 0%, #b91c1c 100%)'};
+  color: ${props => props.theme?.text?.white || '#ffffff'};
   padding: 0.75rem 1.5rem;
   border-radius: 2rem;
   font-size: 0.875rem;
@@ -124,7 +125,7 @@ const Badge = styled.div`
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-bottom: 1.5rem;
-  box-shadow: ${props => props.theme.shadows.glow};
+  box-shadow: ${props => props.theme?.shadows?.glow || '0 0 2rem rgba(220, 38, 38, 0.3)'};
   
   svg {
     font-size: 1rem;
@@ -135,7 +136,7 @@ const MainHeading = styled.h1`
   font-size: 4rem;
   font-weight: 800;
   line-height: 1.1;
-  color: ${props => props.theme.text.white};
+  color: ${props => props.theme?.text?.white || '#ffffff'};
   margin-bottom: 1.5rem;
   text-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.5);
   
@@ -155,7 +156,7 @@ const MainHeading = styled.h1`
 
 const SubHeading = styled.p`
   font-size: 1.25rem;
-  color: ${props => props.theme.text.white};
+  color: ${props => props.theme?.text?.white || '#ffffff'};
   margin-bottom: 2rem;
   line-height: 1.6;
   opacity: 0.9;
@@ -178,8 +179,8 @@ const ButtonGroup = styled.div`
 `;
 
 const PrimaryButton = styled.button`
-  background: ${props => props.theme.gradients.primary};
-  color: ${props => props.theme.text.white};
+  background: ${props => props.theme?.gradients?.primary || 'linear-gradient(135deg, #dc2626 0%, #b91c1c 100%)'};
+  color: ${props => props.theme?.text?.white || '#ffffff'};
   border: none;
   padding: 1rem 2rem;
   border-radius: 0.5rem;
@@ -190,11 +191,11 @@ const PrimaryButton = styled.button`
   align-items: center;
   gap: 0.5rem;
   transition: all 0.3s ease;
-  box-shadow: ${props => props.theme.shadows.medium};
+  box-shadow: ${props => props.theme?.shadows?.medium || '0 0.5rem 1rem rgba(0, 0, 0, 0.15)'};
   
   &:hover {
     transform: translateY(-0.125rem);
-    box-shadow: ${props => props.theme.shadows.glow};
+    box-shadow: ${props => props.theme?.shadows?.glow || '0 0 2rem rgba(220, 38, 38, 0.3)'};
   }
   
   &:active {
@@ -212,7 +213,7 @@ const PrimaryButton = styled.button`
 
 const SecondaryButton = styled.button`
   background: transparent;
-  color: ${props => props.theme.text.white};
+  color: ${props => props.theme?.text?.white || '#ffffff'};
   border: 0.125rem solid ${props => props.theme.text.white};
   padding: 1rem 2rem;
   border-radius: 0.5rem;
@@ -245,18 +246,19 @@ const CarShowcase = styled.div`
   backdrop-filter: blur(0.625rem);
   border: 0.0625rem solid rgba(255, 255, 255, 0.1);
   box-shadow: ${props => props.theme.shadows.large};
+  margin-top: 2rem; /* Add space from header */
 `;
 
 const CarName = styled.h3`
   font-size: 1.5rem;
   font-weight: 700;
-  color: ${props => props.theme.text.white};
+  color: ${props => props.theme?.text?.white || '#ffffff'};
   margin-bottom: 0.5rem;
 `;
 
 const CarPrice = styled.p`
   font-size: 1.125rem;
-  color: ${props => props.theme.colors.primary};
+  color: ${props => props.theme?.colors?.primary || '#dc2626'};
   font-weight: 600;
   margin-bottom: 1.5rem;
 `;
@@ -291,13 +293,13 @@ const StatItem = styled.div`
 const StatNumber = styled.div`
   font-size: 1.5rem;
   font-weight: 700;
-  color: ${props => props.theme.colors.primary};
+  color: ${props => props.theme?.colors?.primary || '#dc2626'};
   margin-bottom: 0.25rem;
 `;
 
 const StatLabel = styled.div`
   font-size: 0.75rem;
-  color: ${props => props.theme.text.white};
+  color: ${props => props.theme?.text?.white || '#ffffff'};
   opacity: 0.8;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -315,15 +317,15 @@ const FloatingIcons = styled.div`
 const FloatingIcon = styled.div`
   width: 3rem;
   height: 3rem;
-  background: ${props => props.theme.gradients.primary};
+  background: ${props => props.theme?.gradients?.primary || 'linear-gradient(135deg, #dc2626 0%, #b91c1c 100%)'};
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: ${props => props.theme.text.white};
+  color: ${props => props.theme?.text?.white || '#ffffff'};
   font-size: 1.125rem;
   animation: ${float} 3s ease-in-out infinite;
-  box-shadow: ${props => props.theme.shadows.medium};
+  box-shadow: ${props => props.theme?.shadows?.medium || '0 0.5rem 1rem rgba(0, 0, 0, 0.15)'};
   
   &:nth-child(2) {
     animation-delay: 0.5s;
@@ -334,25 +336,25 @@ const FloatingIcon = styled.div`
   }
 `;
 
-// High-quality car images from web
+// High-quality automotive restoration showcase
 const carImages = [
   {
     src: "https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-    name: "BMW M4 Competition",
+    name: "Luxury Sports Car",
     price: "Premium Restoration",
-    alt: "BMW M4 Competition"
+    alt: "Luxury Sports Car Restoration"
   },
   {
     src: "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80",
-    name: "Toyota Supra",
+    name: "Performance Vehicle",
     price: "Complete Overhaul",
-    alt: "Toyota Supra"
+    alt: "Performance Vehicle Restoration"
   },
   {
     src: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-    name: "Acura NSX",
+    name: "Exotic Supercar",
     price: "Insurance Claim",
-    alt: "Acura NSX"
+    alt: "Exotic Supercar Bodywork"
   }
 ];
 

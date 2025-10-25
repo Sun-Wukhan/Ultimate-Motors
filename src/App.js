@@ -1,7 +1,6 @@
 import React from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import { ThemeProvider } from './contexts/ThemeContext';
-import ThemeToggle from './components/ThemeToggle';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Services from './components/Services';
@@ -67,7 +66,6 @@ function App() {
     <ThemeProvider>
       <AppContainer>
         <GlobalStyle />
-        <ThemeToggle />
         <Header />
         <Hero />
         <Services />
