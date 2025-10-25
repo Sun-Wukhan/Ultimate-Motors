@@ -347,7 +347,6 @@ const Hero = () => {
         onError={(e) => console.error('Video failed to load:', e)}
         onCanPlay={() => console.log('Video ready to play')}
       >
-        <source src="/hero-video.mp4" type="video/mp4" />
         <source src="/images/hero/b371e117a3084b34968a0b6ad3fadf03.MP4" type="video/mp4" />
         Your browser does not support the video tag.
       </VideoBackground>
