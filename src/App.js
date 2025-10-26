@@ -51,6 +51,12 @@ const GlobalStyle = createGlobalStyle`
   * {
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
   }
+  
+  /* Loading spinner animation */
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
 `;
 
 const AppContainer = styled.div`

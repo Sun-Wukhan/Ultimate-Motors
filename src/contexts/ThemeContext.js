@@ -17,26 +17,31 @@ export const themes = {
       primary: '#ffffff',
       secondary: '#f8f9fa',
       tertiary: '#e9ecef',
+      card: 'linear-gradient(135deg, rgba(220, 38, 38, 0.02) 0%, rgba(239, 68, 68, 0.01) 100%)',
       overlay: 'rgba(255, 255, 255, 0.9)',
       videoOverlay: 'rgba(0, 0, 0, 0.4)',
+      input: 'rgba(0, 0, 0, 0.05)',
+      dropdown: '#ffffff',
     },
     // Text colors
     text: {
       primary: '#212529',
-      secondary: '#6c757d',
+      secondary: '#343a40',
       accent: '#dc2626',
-      light: '#495057',
+      light: '#212529',
       white: '#ffffff',
+      placeholder: '#495057',
     },
     // Brand colors
     colors: {
       primary: '#dc2626',
       secondary: '#000000',
       accent: '#ffd700',
-      success: '#28a745',
-      warning: '#ffc107',
-      danger: '#dc3545',
-      info: '#17a2b8',
+      success: '#10b981',
+      warning: '#f59e0b',
+      danger: '#ef4444',
+      info: '#3b82f6',
+      border: 'rgba(0, 0, 0, 0.2)',
     },
     // Gradients
     gradients: {
@@ -50,16 +55,20 @@ export const themes = {
       medium: '0 0.5rem 1rem rgba(0, 0, 0, 0.15)',
       large: '0 1rem 3rem rgba(0, 0, 0, 0.175)',
       glow: '0 0 2rem rgba(220, 38, 38, 0.3)',
+      card: '0 0.9375rem 1.875rem rgba(220, 38, 38, 0.1)',
     },
   },
   dark: {
     // Background colors
     background: {
-      primary: '#0f0f0f',
+      primary: 'linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 50%, #1a1a1a 100%)',
       secondary: '#1a1a1a',
       tertiary: '#2d2d2d',
+      card: 'linear-gradient(135deg, rgba(220, 38, 38, 0.05) 0%, rgba(239, 68, 68, 0.02) 100%)',
       overlay: 'rgba(0, 0, 0, 0.9)',
       videoOverlay: 'rgba(0, 0, 0, 0.6)',
+      input: 'rgba(255, 255, 255, 0.05)',
+      dropdown: '#1a1a1a',
     },
     // Text colors
     text: {
@@ -68,16 +77,18 @@ export const themes = {
       accent: '#ff4444',
       light: '#cccccc',
       white: '#ffffff',
+      placeholder: '#999999',
     },
     // Brand colors
     colors: {
-      primary: '#ff4444',
+      primary: '#dc2626',
       secondary: '#ffffff',
       accent: '#ffd700',
       success: '#4ade80',
       warning: '#facc15',
       danger: '#ef4444',
       info: '#06b6d4',
+      border: 'rgba(255, 255, 255, 0.2)',
     },
     // Gradients
     gradients: {
@@ -91,6 +102,7 @@ export const themes = {
       medium: '0 0.5rem 1rem rgba(0, 0, 0, 0.4)',
       large: '0 1rem 3rem rgba(0, 0, 0, 0.5)',
       glow: '0 0 2rem rgba(255, 68, 68, 0.4)',
+      card: '0 0.9375rem 1.875rem rgba(220, 38, 38, 0.1)',
     },
   },
 };

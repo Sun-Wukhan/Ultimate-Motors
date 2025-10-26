@@ -30,7 +30,7 @@ const HeroSection = styled.section`
   position: relative;
   overflow: hidden;
   background: ${props => props.theme?.background?.primary || '#ffffff'};
-  padding-top: 6rem; /* Add space for fixed header */
+  padding-top: 7rem; /* Add space for fixed header */
 `;
 
 const VideoBackground = styled.video`
@@ -339,22 +339,22 @@ const FloatingIcon = styled.div`
 // High-quality automotive restoration showcase
 const carImages = [
   {
-    src: "https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-    name: "Luxury Sports Car",
+    src: "https://ww2.pca.org/media/sites/default/files/u/GT2RS-Front-Roller-DPetlakh.jpg",
+    name: "Insurance Jobs",
     price: "Premium Restoration",
-    alt: "Luxury Sports Car Restoration"
+    alt: "Restorations of all Builds and Brands"
   },
   {
-    src: "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80",
-    name: "Performance Vehicle",
+    src: "https://toyotacanada.scene7.com/is/image/toyotacanada/lexus-2026-lc-500-convertible-hero-ultra-white-l?fit=constrain&wid=2200",
+    name: "Custom Jobs",
     price: "Complete Overhaul",
-    alt: "Performance Vehicle Restoration"
+    alt: "Performance Vehicle / Tune and Build"
   },
   {
-    src: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-    name: "Exotic Supercar",
-    price: "Insurance Claim",
-    alt: "Exotic Supercar Bodywork"
+    src: "https://live.staticflickr.com/4350/37119662395_2cab6542a0_b.jpg",
+    name: "Insurane Claims",
+    price: "We deal with ALL major Insurance Companies",
+    alt: "Restore Your Car to its Original Condition"
   }
 ];
 
@@ -408,7 +408,7 @@ const Hero = () => {
           </MainHeading>
           
           <SubHeading theme={theme}>
-            Professional auto body repair and restoration services for all vehicle types. 
+            Professional auto body repair, restoration, wrap and mechanical services for all vehicle types. 
             From luxury cars to everyday vehicles, we handle insurance claims and 
             complete restorations with precision and care.
           </SubHeading>

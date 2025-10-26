@@ -281,7 +281,7 @@ const galleryItems = [
   // Luxury Sports Car Work
   {
     id: 1,
-    src: "https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    src: "https://upload.wikimedia.org/wikipedia/commons/9/97/BMW_730d_%28G11%2C_Facelift%29_%E2%80%93_f_16012021.jpg",
     title: "Luxury Sports Car Restoration",
     category: "Luxury",
     description: "Complete body restoration and paint correction"
@@ -304,7 +304,7 @@ const galleryItems = [
   // Sports Car Work
   {
     id: 4,
-    src: "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    src: "https://www.thedrive.com/wp-content/uploads/2024/08/2024-Toyota-Supra-stick-shift.jpg?quality=85",
     title: "Sports Car Restoration",
     category: "Sports",
     description: "Performance restoration and custom paint"

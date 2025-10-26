@@ -1,43 +1,46 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { FiPhone, FiMail, FiMapPin, FiClock, FiSend, FiUser, FiMessageSquare } from 'react-icons/fi';
+import { FiPhone, FiMail, FiMapPin, FiClock, FiSend, FiUser, FiMessageSquare, FiCheck, FiX } from 'react-icons/fi';
+import { useTheme } from '../contexts/ThemeContext';
+import emailjs from '@emailjs/browser';
+import { emailjsConfig } from '../config/emailjs';
 
 const ContactSection = styled.section`
-  padding: 120px 0;
-  background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 50%, #1a1a1a 100%);
+  padding: 7.5rem 0;
+  background: ${props => props.theme?.background?.primary || 'linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 50%, #1a1a1a 100%)'};
   position: relative;
 `;
 
 const Container = styled.div`
-  max-width: 1200px;
+  max-width: 75rem;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 1.25rem;
 `;
 
 const SectionHeader = styled.div`
   text-align: center;
-  margin-bottom: 80px;
+  margin-bottom: 5rem;
 `;
 
 const Badge = styled.div`
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  background: rgba(220, 38, 38, 0.1);
-  border: 1px solid rgba(220, 38, 38, 0.3);
-  padding: 8px 16px;
-  border-radius: 25px;
-  color: #dc2626;
-  font-size: 14px;
+  gap: 0.5rem;
+  background: ${props => `${props.theme?.colors?.primary || '#dc2626'}1a`};
+  border: 0.0625rem solid ${props => `${props.theme?.colors?.primary || '#dc2626'}4d`};
+  padding: 0.5rem 1rem;
+  border-radius: 1.5625rem;
+  color: ${props => props.theme?.colors?.primary || '#dc2626'};
+  font-size: 0.875rem;
   font-weight: 500;
-  margin-bottom: 20px;
-  backdrop-filter: blur(10px);
+  margin-bottom: 1.25rem;
+  backdrop-filter: blur(0.625rem);
 `;
 
 const SectionTitle = styled.h2`
   font-size: clamp(2rem, 4vw, 3rem);
-  color: #fff;
-  margin-bottom: 20px;
+  color: ${props => props.theme?.text?.primary || '#fff'};
+  margin-bottom: 1.25rem;
   font-weight: 600;
   
   .highlight {
@@ -50,8 +53,8 @@ const SectionTitle = styled.h2`
 
 const SectionDescription = styled.p`
   font-size: 1.125rem;
-  color: #ccc;
-  max-width: 600px;
+  color: ${props => props.theme?.text?.secondary || '#ccc'};
+  max-width: 37.5rem;
   margin: 0 auto;
   line-height: 1.6;
 `;
@@ -59,12 +62,12 @@ const SectionDescription = styled.p`
 const ContactContent = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 80px;
+  gap: 5rem;
   align-items: start;
   
-  @media (max-width: 968px) {
+  @media (max-width: 60.5rem) {
     grid-template-columns: 1fr;
-    gap: 50px;
+    gap: 3.125rem;
   }
 `;
 
@@ -72,70 +75,70 @@ const ContactInfo = styled.div``;
 
 const InfoTitle = styled.h3`
   font-size: 1.75rem;
-  color: #fff;
-  margin-bottom: 30px;
+  color: ${props => props.theme?.text?.primary || '#fff'};
+  margin-bottom: 1.875rem;
   font-weight: 600;
 `;
 
 const InfoGrid = styled.div`
   display: grid;
-  gap: 30px;
-  margin-bottom: 40px;
+  gap: 1.875rem;
+  margin-bottom: 2.5rem;
 `;
 
 const InfoCard = styled.div`
-  background: linear-gradient(135deg, rgba(220, 38, 38, 0.05) 0%, rgba(239, 68, 68, 0.02) 100%);
-  border: 1px solid rgba(220, 38, 38, 0.2);
-  border-radius: 15px;
-  padding: 25px;
+  background: ${props => props.theme?.background?.card || 'linear-gradient(135deg, rgba(220, 38, 38, 0.05) 0%, rgba(239, 68, 68, 0.02) 100%)'};
+  border: 0.0625rem solid ${props => `${props.theme?.colors?.primary || '#dc2626'}33`};
+  border-radius: 0.9375rem;
+  padding: 1.5625rem;
   transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(0.625rem);
   
   &:hover {
-    transform: translateY(-5px);
-    border-color: rgba(220, 38, 38, 0.4);
-    box-shadow: 0 10px 25px rgba(220, 38, 38, 0.1);
+    transform: translateY(-0.3125rem);
+    border-color: ${props => `${props.theme?.colors?.primary || '#dc2626'}66`};
+    box-shadow: ${props => props.theme?.shadows?.card || '0 0.625rem 1.5625rem rgba(220, 38, 38, 0.1)'};
   }
 `;
 
 const InfoIcon = styled.div`
-  width: 50px;
-  height: 50px;
+  width: 3.125rem;
+  height: 3.125rem;
   background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 15px;
-  font-size: 20px;
-  color: #fff;
+  margin-bottom: 0.9375rem;
+  font-size: 1.25rem;
+  color: ${props => props.theme?.text?.white || '#fff'};
 `;
 
 const InfoLabel = styled.h4`
-  color: #fff;
+  color: ${props => props.theme?.text?.primary || '#fff'};
   font-size: 1.125rem;
-  margin-bottom: 8px;
+  margin-bottom: 0.5rem;
   font-weight: 600;
 `;
 
 const InfoText = styled.p`
-  color: #ccc;
+  color: ${props => props.theme?.text?.secondary || '#ccc'};
   line-height: 1.5;
   white-space: pre-line;
 `;
 
 const ContactForm = styled.form`
-  background: linear-gradient(135deg, rgba(220, 38, 38, 0.05) 0%, rgba(239, 68, 68, 0.02) 100%);
-  border: 1px solid rgba(220, 38, 38, 0.2);
-  border-radius: 20px;
-  padding: 40px;
-  backdrop-filter: blur(10px);
+  background: ${props => props.theme?.background?.card || 'linear-gradient(135deg, rgba(220, 38, 38, 0.05) 0%, rgba(239, 68, 68, 0.02) 100%)'};
+  border: 0.0625rem solid ${props => `${props.theme?.colors?.primary || '#dc2626'}33`};
+  border-radius: 1.25rem;
+  padding: 2.5rem;
+  backdrop-filter: blur(0.625rem);
 `;
 
 const FormTitle = styled.h3`
   font-size: 1.75rem;
-  color: #fff;
-  margin-bottom: 30px;
+  color: ${props => props.theme?.text?.primary || '#fff'};
+  margin-bottom: 1.875rem;
   font-weight: 600;
   text-align: center;
 `;
@@ -143,16 +146,16 @@ const FormTitle = styled.h3`
 const FormGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  margin-bottom: 20px;
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
   
-  @media (max-width: 600px) {
+  @media (max-width: 37.5rem) {
     grid-template-columns: 1fr;
   }
 `;
 
 const FormGroup = styled.div`
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
   
   &.full-width {
     grid-column: 1 / -1;
@@ -161,106 +164,108 @@ const FormGroup = styled.div`
 
 const FormLabel = styled.label`
   display: block;
-  color: #fff;
-  font-size: 14px;
+  color: ${props => props.theme?.text?.primary || '#fff'};
+  font-size: 0.875rem;
   font-weight: 500;
-  margin-bottom: 8px;
+  margin-bottom: 0.5rem;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.03125rem;
 `;
 
 const FormInput = styled.input`
   width: 100%;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 10px;
-  padding: 15px;
-  color: #fff;
-  font-size: 16px;
+  background: ${props => props.theme?.background?.input || 'rgba(255, 255, 255, 0.05)'};
+  border: 0.0625rem solid ${props => props.theme?.colors?.border || 'rgba(255, 255, 255, 0.2)'};
+  border-radius: 0.625rem;
+  padding: 0.9375rem;
+  color: ${props => props.theme?.text?.primary || '#fff'};
+  font-size: 1rem;
   transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(0.625rem);
   
   &::placeholder {
-    color: #999;
+    color: ${props => props.theme?.text?.placeholder || '#999'};
   }
   
   &:focus {
     outline: none;
-    border-color: #dc2626;
-    box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.2);
+    border-color: ${props => props.theme?.colors?.primary || '#dc2626'};
+    box-shadow: 0 0 0 0.125rem ${props => `${props.theme?.colors?.primary || '#dc2626'}33`};
   }
 `;
 
 const FormTextarea = styled.textarea`
   width: 100%;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 10px;
-  padding: 15px;
-  color: #fff;
-  font-size: 16px;
-  min-height: 120px;
+  background: ${props => props.theme?.background?.input || 'rgba(255, 255, 255, 0.05)'};
+  border: 0.0625rem solid ${props => props.theme?.colors?.border || 'rgba(255, 255, 255, 0.2)'};
+  border-radius: 0.625rem;
+  padding: 0.9375rem;
+  color: ${props => props.theme?.text?.primary || '#fff'};
+  font-size: 1rem;
+  min-height: 7.5rem;
   resize: vertical;
   transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(0.625rem);
   font-family: inherit;
   
   &::placeholder {
-    color: #999;
+    color: ${props => props.theme?.text?.placeholder || '#999'};
   }
   
   &:focus {
     outline: none;
-    border-color: #dc2626;
-    box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.2);
+    border-color: ${props => props.theme?.colors?.primary || '#dc2626'};
+    box-shadow: 0 0 0 0.125rem ${props => `${props.theme?.colors?.primary || '#dc2626'}33`};
   }
 `;
 
 const FormSelect = styled.select`
   width: 100%;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 10px;
-  padding: 15px;
-  color: #fff;
-  font-size: 16px;
+  background: ${props => props.theme?.background?.input || 'rgba(255, 255, 255, 0.05)'};
+  border: 0.0625rem solid ${props => props.theme?.colors?.border || 'rgba(255, 255, 255, 0.2)'};
+  border-radius: 0.625rem;
+  padding: 0.9375rem;
+  color: ${props => props.theme?.text?.primary || '#fff'};
+  font-size: 1rem;
   transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(0.625rem);
   cursor: pointer;
   
   &:focus {
     outline: none;
-    border-color: #dc2626;
-    box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.2);
+    border-color: ${props => props.theme?.colors?.primary || '#dc2626'};
+    box-shadow: 0 0 0 0.125rem ${props => `${props.theme?.colors?.primary || '#dc2626'}33`};
   }
   
   option {
-    background: #1a1a1a;
-    color: #fff;
+    background: ${props => props.theme?.background?.dropdown || '#1a1a1a'};
+    color: ${props => props.theme?.text?.primary || '#fff'};
   }
 `;
 
 const SubmitButton = styled.button`
   width: 100%;
-  background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
-  color: #fff;
+  background: ${props => props.$isLoading ? 
+    'linear-gradient(135deg, #6b7280 0%, #9ca3af 100%)' : 
+    'linear-gradient(135deg, #dc2626 0%, #ef4444 100%)'};
+  color: ${props => props.theme?.text?.white || '#fff'};
   border: none;
-  padding: 16px 32px;
-  border-radius: 30px;
+  padding: 1rem 2rem;
+  border-radius: 1.875rem;
   font-weight: 600;
-  font-size: 16px;
-  cursor: pointer;
+  font-size: 1rem;
+  cursor: ${props => props.$isLoading ? 'not-allowed' : 'pointer'};
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 0.625rem;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.03125rem;
   
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(220, 38, 38, 0.4);
+    transform: ${props => props.$isLoading ? 'none' : 'translateY(-0.125rem)'};
+    box-shadow: ${props => props.$isLoading ? 'none' : '0 0.625rem 1.5625rem rgba(220, 38, 38, 0.4)'};
   }
   
   &:disabled {
@@ -270,11 +275,34 @@ const SubmitButton = styled.button`
   }
 `;
 
+const StatusMessage = styled.div`
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  
+  &.success {
+    background: ${props => props.theme?.colors?.success || '#10b981'}1a;
+    border: 0.0625rem solid ${props => props.theme?.colors?.success || '#10b981'}33;
+    color: ${props => props.theme?.colors?.success || '#10b981'};
+  }
+  
+  &.error {
+    background: ${props => props.theme?.colors?.danger || '#ef4444'}1a;
+    border: 0.0625rem solid ${props => props.theme?.colors?.danger || '#ef4444'}33;
+    color: ${props => props.theme?.colors?.danger || '#ef4444'};
+  }
+`;
+
 /**
  * Contact section with contact information and inquiry form
  * @returns {JSX.Element} The contact section
  */
 const Contact = () => {
+  const { theme } = useTheme();
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -285,6 +313,13 @@ const Contact = () => {
     vehicleModel: '',
     message: ''
   });
+  const [isLoading, setIsLoading] = useState(false);
+  const [status, setStatus] = useState({ type: '', message: '' });
+
+  // Initialize EmailJS
+  React.useEffect(() => {
+    emailjs.init(emailjsConfig.publicKey);
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -292,30 +327,98 @@ const Contact = () => {
       ...prev,
       [name]: value
     }));
+    // Clear status when user starts typing
+    if (status.message) {
+      setStatus({ type: '', message: '' });
+    }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted:', formData);
-    alert('Thank you for your inquiry! We will contact you within 24 hours.');
+    setIsLoading(true);
+    setStatus({ type: '', message: '' });
+
+    try {
+      // Prepare template parameters to match your EmailJS template
+      const now = new Date();
+      const templateParams = {
+        first_name: formData.firstName,
+        last_name: formData.lastName,
+        email: formData.email,
+        phone: formData.phone || 'Not provided',
+        service_needed: formData.service,
+        vehicle_make: formData.vehicleMake || 'Not specified',
+        vehicle_model: formData.vehicleModel || 'Not specified',
+        project_details: formData.message,
+        send_date: now.toLocaleDateString('en-US', { 
+          weekday: 'long', 
+          year: 'numeric', 
+          month: 'long', 
+          day: 'numeric' 
+        }),
+        send_time: now.toLocaleTimeString('en-US', { 
+          hour: '2-digit', 
+          minute: '2-digit',
+          timeZoneName: 'short'
+        }),
+        to_name: 'Ultimate Motors Team',
+        reply_to: formData.email
+      };
+
+      // Send email using EmailJS
+      const result = await emailjs.send(
+        emailjsConfig.serviceId,
+        emailjsConfig.templateId,
+        templateParams,
+        emailjsConfig.publicKey
+      );
+
+      console.log('Email sent successfully:', result);
+      
+      // Show success message
+      setStatus({
+        type: 'success',
+        message: 'Thank you for your inquiry! We will contact you within 24 hours.'
+      });
+
+      // Reset form
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        service: '',
+        vehicleMake: '',
+        vehicleModel: '',
+        message: ''
+      });
+
+    } catch (error) {
+      console.error('EmailJS error:', error);
+      setStatus({
+        type: 'error',
+        message: 'Sorry, there was an error sending your message. Please try again or contact us directly.'
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const contactInfo = [
     {
       icon: <FiPhone />,
       label: "Phone",
-      text: "(416) 555-MOTORS\n(416) 555-6687"
+      text: "(416)-500-0097"
     },
     {
       icon: <FiMail />,
       label: "Email",
-      text: "info@ultimatemotors.com\nconsultation@ultimatemotors.com"
+      text: "info@ultimate-motors.com"
     },
     {
       icon: <FiMapPin />,
       label: "Location",
-      text: "123 King Street West\nToronto, ON M5V 3A8"
+      text: "21 Bertrand Avenue\nToronto, ON M1L 2P3"
     },
     {
       icon: <FiClock />,
@@ -325,17 +428,17 @@ const Contact = () => {
   ];
 
   return (
-    <ContactSection id="contact">
+    <ContactSection id="contact" theme={theme}>
       <Container>
         <SectionHeader>
-          <Badge>
+          <Badge theme={theme}>
             <FiMessageSquare />
             Get In Touch
           </Badge>
-          <SectionTitle>
+          <SectionTitle theme={theme}>
             Start Your <span className="highlight">Restoration</span> Experience
           </SectionTitle>
-          <SectionDescription>
+          <SectionDescription theme={theme}>
             Ready to restore your vehicle? Contact our expert team for a 
             personalized consultation and detailed estimate. Insurance claims welcome.
           </SectionDescription>
@@ -343,15 +446,15 @@ const Contact = () => {
         
         <ContactContent>
           <ContactInfo>
-            <InfoTitle>Contact Information</InfoTitle>
+            <InfoTitle theme={theme}>Contact Information</InfoTitle>
             <InfoGrid>
               {contactInfo.map((info, index) => (
-                <InfoCard key={index}>
-                  <InfoIcon>
+                <InfoCard key={index} theme={theme}>
+                  <InfoIcon theme={theme}>
                     {info.icon}
                   </InfoIcon>
-                  <InfoLabel>{info.label}</InfoLabel>
-                  <InfoText>
+                  <InfoLabel theme={theme}>{info.label}</InfoLabel>
+                  <InfoText theme={theme}>
                     {info.text}
                   </InfoText>
                 </InfoCard>
@@ -359,13 +462,14 @@ const Contact = () => {
             </InfoGrid>
           </ContactInfo>
           
-          <ContactForm onSubmit={handleSubmit}>
-            <FormTitle>Request Consultation</FormTitle>
+          <ContactForm onSubmit={handleSubmit} theme={theme}>
+            <FormTitle theme={theme}>Request Consultation</FormTitle>
             
             <FormGrid>
               <FormGroup>
-                <FormLabel>First Name *</FormLabel>
+                <FormLabel theme={theme}>First Name *</FormLabel>
                 <FormInput
+                  theme={theme}
                   type="text"
                   name="firstName"
                   value={formData.firstName}
@@ -376,8 +480,9 @@ const Contact = () => {
               </FormGroup>
               
               <FormGroup>
-                <FormLabel>Last Name *</FormLabel>
+                <FormLabel theme={theme}>Last Name *</FormLabel>
                 <FormInput
+                  theme={theme}
                   type="text"
                   name="lastName"
                   value={formData.lastName}
@@ -390,8 +495,9 @@ const Contact = () => {
             
             <FormGrid>
               <FormGroup>
-                <FormLabel>Email *</FormLabel>
+                <FormLabel theme={theme}>Email *</FormLabel>
                 <FormInput
+                  theme={theme}
                   type="email"
                   name="email"
                   value={formData.email}
@@ -402,8 +508,9 @@ const Contact = () => {
               </FormGroup>
               
               <FormGroup>
-                <FormLabel>Phone</FormLabel>
+                <FormLabel theme={theme}>Phone</FormLabel>
                 <FormInput
+                  theme={theme}
                   type="tel"
                   name="phone"
                   value={formData.phone}
@@ -414,8 +521,9 @@ const Contact = () => {
             </FormGrid>
             
             <FormGroup>
-              <FormLabel>Service Needed *</FormLabel>
+              <FormLabel theme={theme}>Service Needed *</FormLabel>
               <FormSelect
+                theme={theme}
                 name="service"
                 value={formData.service}
                 onChange={handleInputChange}
@@ -433,8 +541,9 @@ const Contact = () => {
             
             <FormGrid>
               <FormGroup>
-                <FormLabel>Vehicle Make</FormLabel>
+                <FormLabel theme={theme}>Vehicle Make</FormLabel>
                 <FormInput
+                  theme={theme}
                   type="text"
                   name="vehicleMake"
                   value={formData.vehicleMake}
@@ -444,8 +553,9 @@ const Contact = () => {
               </FormGroup>
               
               <FormGroup>
-                <FormLabel>Vehicle Model</FormLabel>
+                <FormLabel theme={theme}>Vehicle Model</FormLabel>
                 <FormInput
+                  theme={theme}
                   type="text"
                   name="vehicleModel"
                   value={formData.vehicleModel}
@@ -456,8 +566,9 @@ const Contact = () => {
             </FormGrid>
             
             <FormGroup className="full-width">
-              <FormLabel>Project Details</FormLabel>
+              <FormLabel theme={theme}>Project Details</FormLabel>
               <FormTextarea
+                theme={theme}
                 name="message"
                 value={formData.message}
                 onChange={handleInputChange}
@@ -465,10 +576,38 @@ const Contact = () => {
               />
             </FormGroup>
             
-            <SubmitButton type="submit">
-              <FiSend />
-              Send Inquiry
+            <SubmitButton 
+              type="submit" 
+              theme={theme} 
+              $isLoading={isLoading}
+              disabled={isLoading}
+            >
+              {isLoading ? (
+                <>
+                  <div style={{ 
+                    width: '1rem', 
+                    height: '1rem', 
+                    border: '2px solid transparent',
+                    borderTop: '2px solid currentColor',
+                    borderRadius: '50%',
+                    animation: 'spin 1s linear infinite'
+                  }} />
+                  Sending...
+                </>
+              ) : (
+                <>
+                  <FiSend />
+                  Send Inquiry
+                </>
+              )}
             </SubmitButton>
+            
+            {status.message && (
+              <StatusMessage className={status.type} theme={theme}>
+                {status.type === 'success' ? <FiCheck /> : <FiX />}
+                {status.message}
+              </StatusMessage>
+            )}
           </ContactForm>
         </ContactContent>
       </Container>

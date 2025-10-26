@@ -9,14 +9,14 @@ const HeaderContainer = styled.header`
   left: 0;
   right: 0;
   z-index: 1000;
-  background: ${props => props.theme?.background?.secondary || (props.$scrolled ? 'rgba(0, 0, 0, 0.98)' : 'rgba(0, 0, 0, 0.9)')};
+  background: ${props => props.$scrolled ? props.theme?.background?.secondary || 'rgba(0, 0, 0, 0.98)' : props.theme?.background?.primary || 'rgba(0, 0, 0, 0.9)'};
   backdrop-filter: blur(0.625rem);
   transition: all 0.3s ease;
   border-bottom: ${props => props.$scrolled ? `0.0625rem solid ${props.theme?.colors?.primary || '#dc2626'}30` : `0.0625rem solid ${props.theme?.colors?.primary || '#dc2626'}20`};
 `;
 
 const TopBar = styled.div`
-  background: ${props => props.theme?.gradients?.secondary || 'linear-gradient(135deg, #000000 0%, #1a1a1a 100%)'};
+  background: ${props => props.theme?.background?.secondary || 'linear-gradient(135deg, #000000 0%, #1a1a1a 100%)'};
   padding: 0.5rem 0;
   border-bottom: 0.0625rem solid ${props => props.theme?.colors?.primary || '#dc2626'}30;
   
